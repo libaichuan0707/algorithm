@@ -9,7 +9,7 @@ import "fmt"
 
 //递归算法
 func PermRecursive(arr []string, beginIndex int) {
-	if beginIndex == len(arr) {
+	if beginIndex == len(arr) - 1 {
 		fmt.Println(arr)
 		return
 	}
