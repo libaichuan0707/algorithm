@@ -23,6 +23,8 @@ func PermRecursive(arr []string, beginIndex int) {
 	}
 }
 
+
+//去重递归全排列
 func IsPermRecursiveRepeat(arr []string, beginIndex int, endIndex int) bool{
 	for temp := beginIndex; temp < endIndex; temp++ {
 		if arr[temp] == arr[endIndex] {
