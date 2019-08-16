@@ -37,3 +37,12 @@ func TestPermNoRecursive(t *testing.T) {
 	arr := []int{2, 1, 1}
 	PermNoRecursive(arr)
 }
+
+
+func TestPermRecursiveOther(t *testing.T) {
+	total := []string{"a", "b","c"}
+	tempTotal:= make([]string, len(total), len(total))
+	used := map[string]bool{}
+
+	PermRecursiveOther(total, tempTotal, used, 0)
+}

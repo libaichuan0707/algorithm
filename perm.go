@@ -54,6 +54,28 @@ func PermRecursiveNoRepeat(arr []string, beginIndex int) {
 	}
 }
 
+//递归的另外一种实现
+//temp存当前这次从根节点到子节点，used存当前使用的字符,beginindex是树的层数
+func PermRecursiveOther(arr []string, temp []string, used map[string]bool, beginIndex int) {
+	if beginIndex == len(arr) {
+		fmt.Println(temp)
+		return
+	}
+
+	for i := 0; i < len(arr); i++ {
+		curr := arr[i]
+		if isUsed, ok := used[curr]; ok && isUsed {
+			continue
+		}
+
+		temp[beginIndex] = curr
+		used[curr] = true
+
+		PermRecursiveOther(arr, temp, used, beginIndex + 1)
+
+		used[curr] = false
+	}
+}
 
 //非递归算法
 
