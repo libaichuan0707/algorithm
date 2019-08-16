@@ -1,6 +1,9 @@
 package algorithm
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 //全排列算法
 
@@ -53,3 +56,78 @@ func PermRecursiveNoRepeat(arr []string, beginIndex int) {
 
 
 //非递归算法
+
+
+//从小到大排序->获得比自己大的一个数
+
+//怎么获得相同数组比当前这个数字大的数?
+
+//找到最大的指数k，使得nums[k] < nums[k + 1]。如果不存在这样的索引，只需反转nums并完成。
+//找到最大的指数l > k，使得nums[k] < nums[l]。
+//交换nums[k]和nums[l]。
+//反转子阵列nums[k + 1:]。
+
+func ReverseSlice(nums []int, beginIndex int) {
+	endIndex := len(nums) - 1
+
+	for {
+		if beginIndex >= endIndex {
+			break
+		}
+
+		nums[beginIndex], nums[endIndex] = nums[endIndex], nums[beginIndex]
+		beginIndex++
+		endIndex--
+	}
+}
+
+func NextPerm(nums []int) bool {
+	if len(nums) <= 1 {
+		return false
+	}
+
+	findIndex := -1
+	endIndex := len(nums) - 1
+
+	for tempIndex := endIndex; tempIndex >= 1; tempIndex-- {
+		if nums[tempIndex - 1] < nums[tempIndex] {
+			findIndex = tempIndex - 1
+			break
+		}
+	}
+
+	if findIndex == -1 {
+		ReverseSlice(nums, 0)
+	}else{
+		for i := endIndex; i > findIndex; i-- {
+			if nums[i] > nums[findIndex] {
+				nums[i], nums[findIndex] = nums[findIndex], nums[i]
+				break
+			}
+		}
+
+		ReverseSlice(nums, findIndex + 1)
+	}
+
+	if findIndex == -1 {
+		return false
+	}else{
+		return true
+	}
+}
+
+func PermNoRecursive(nums []int) {
+	sort.Ints(nums)
+
+	fmt.Println(nums)
+	needBreak := true
+
+	for {
+		needBreak = NextPerm(nums)
+		fmt.Println(nums)
+
+		if !needBreak {
+			break
+		}
+	}
+}

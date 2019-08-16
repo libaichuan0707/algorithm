@@ -27,3 +27,13 @@ func TestPermRecursiveNoRepeat(t *testing.T) {
 	}
 
 }
+
+func TestNextPerm(t *testing.T) {
+	arr := []int{2,3,5,1}
+	fmt.Println(NextPerm(arr))
+}
+
+func TestPermNoRecursive(t *testing.T) {
+	arr := []int{2, 1, 1}
+	PermNoRecursive(arr)
+}
